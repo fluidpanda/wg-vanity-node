@@ -7,11 +7,11 @@
         "build": "tsc",
         "build:watch": "tsc -w",
         "dev": "tsx watch src/main.ts",
-        "start": "node dist/main.js",
-        "show_help": "node dist/main.js --help",
-        "test_wg_prefix": "node dist/main.js --prefix yoba",
-        "test_wg_prefix_ignore_case": "node dist/main.js --prefix yoba --ignore-case",
-        "test_wrong_key": "node dist/main.js --yoba"
+        "test:start": "node dist/main.js",
+        "test:help": "node dist/main.js --help",
+        "test:wg_prefix": "node dist/main.js --prefix yoba",
+        "test:wg_prefix_ignore_case": "node dist/main.js --prefix yoba --ignore-case",
+        "test:wrong_key": "node dist/main.js --yoba"
     },
     "keywords": [],
     "author": "borr",
