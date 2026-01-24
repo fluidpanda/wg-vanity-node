@@ -25,8 +25,6 @@ function progressLineRenderEnd(): void {
 
 export interface MTSearchOptions {
     jobs?: number;
-    reportIntervalMs?: number;
-    reportEveryAttempts?: number;
     ignoreCase?: boolean;
 }
 
