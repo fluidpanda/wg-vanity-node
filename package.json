@@ -1,0 +1,29 @@
+{
+    "name": "wg-vanity-node",
+    "version": "0.0.1",
+    "description": "generate wg key-pairs by prefix",
+    "main": "dist/main.js",
+    "scripts": {
+        "build": "tsc",
+        "build:watch": "tsc -w",
+        "dev": "tsx watch src/main.ts",
+        "start": "node dist/main.js",
+        "show_help": "node dist/main.js --help",
+        "test_wg_prefix": "node dist/main.js --prefix yoba",
+        "test_wg_prefix_ignore_case": "node dist/main.js --prefix yoba --ignore-case",
+        "test_wrong_key": "node dist/main.js --yoba"
+    },
+    "keywords": [],
+    "author": "borr",
+    "license": "ISC",
+    "type": "module",
+    "devDependencies": {
+        "@types/node": "^25.0.10",
+        "@typescript-eslint/eslint-plugin": "^8.53.1",
+        "@typescript-eslint/parser": "^8.53.1",
+        "eslint": "^9.39.2",
+        "eslint-config-prettier": "^10.1.8",
+        "prettier": "^3.8.1",
+        "tsx": "^4.21.0"
+    }
+}
