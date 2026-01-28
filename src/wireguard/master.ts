@@ -1,11 +1,13 @@
+import { fork } from "node:child_process";
 import path from "node:path";
 import readline from "node:readline";
-import { ChildProcess, fork } from "node:child_process";
 import { clearInterval } from "node:timers";
-import { estimateTime, estimateVanity, VanityEstimate, VanityTimeEstimate } from "./wg.js";
-import { getSystemInfoCached } from "./system.js";
-import { SETTINGS } from "./settings.js";
-import { WorkerMsg } from "./wg_slave.js";
+import { estimateTime, estimateVanity } from "./logic.js";
+import { SETTINGS } from "../settings.js";
+import { getSystemInfoCached } from "../system.js";
+import type { VanityEstimate, VanityTimeEstimate } from "./logic.js";
+import type { WorkerMsg } from "./slave.js";
+import type { ChildProcess } from "node:child_process";
 
 function progressLineRenderBegin(line: string): void {
     if (process.stderr.isTTY) {
@@ -46,7 +48,7 @@ export async function findVanityWireguardPairMT(
     const reportIntervalMs: number = SETTINGS.report.intervalMs;
     const ignoreCase: boolean = !!options.ignoreCase;
     const est: VanityEstimate = estimateVanity(prefix);
-    const worker: string = path.resolve("dist", "./wg_slave.js");
+    const worker: string = path.resolve("dist", "./wireguard/slave.js");
     const started: number = Date.now();
     const attemptsByPid = new Map<number, number>();
     const slaves: ChildProcess[] = Array.from({ length: jobs }, (): ChildProcess => {

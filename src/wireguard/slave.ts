@@ -1,4 +1,5 @@
-import { generateWireguardKeyPair, WireguardKeyPair } from "./wg.js";
+import { generateWireguardKeyPair } from "./logic.js";
+import type { WireguardKeyPair } from "./logic.js";
 
 export type WorkerMsg =
     | { type: "progress"; attempts: number; elapsedMs: number }
@@ -11,13 +12,15 @@ function send(msg: WorkerMsg): void {
     }
 }
 
-function main(): void {
+function main(): never {
     const prefix: string | undefined = process.env.WG_PREFIX;
     if (!prefix) {
         send({ type: "error", message: "WG_PREFIX is not set" });
         process.exit(2);
     }
-    const reportEveryAttempts: number = Number(process.env.WG_REPORT_EVERY);
+    const reportEveryAttemptsRaw: number = Number(process.env.WG_REPORT_EVERY);
+    const reportEveryAttempts: number =
+        Number.isFinite(reportEveryAttemptsRaw) && reportEveryAttemptsRaw > 0 ? reportEveryAttemptsRaw : 100_000;
     const ignoreCase: boolean = process.env.WG_IGNORE_CASE === "1";
     const prefixNorm: string = ignoreCase ? prefix.toLowerCase() : prefix;
     const started: number = Date.now();

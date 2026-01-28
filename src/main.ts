@@ -1,6 +1,9 @@
-import { CliOptions, parseArgs, printHelp } from "./cli.js";
-import { findVanityWireguardPairMT, MTSearchResult } from "./wg_master.js";
-import { getSystemInfoCached, SystemInfo } from "./system.js";
+import { parseArgs, printHelp } from "./cli.js";
+import { getSystemInfoCached } from "./system.js";
+import { findVanityWireguardPairMT } from "./wireguard/master.js";
+import type { CliOptions } from "./cli.js";
+import type { SystemInfo } from "./system.js";
+import type { MTSearchResult } from "./wireguard/master.js";
 
 async function main(): Promise<void> {
     const options: CliOptions = parseArgs(process.argv.slice(2));
